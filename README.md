@@ -19,4 +19,7 @@ Download the dataset from Kaggle (requires account and API credentials in `~/.ka
 ```bash
 kaggle datasets download -d amanace/student-admission-dataset
 unzip student-admission-dataset.zip
+# Output: student_admission_dataset.csv
 ```
+
+Columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status` (Accepted/Rejected/Waitlisted).
