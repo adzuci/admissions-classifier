@@ -4,18 +4,31 @@ Binary classifier (logistic regression) that predicts Admit/Reject for college a
 
 ## Project Requirements
 
-**Business scenario**: University/College Admissions would like an admissions pipeline from beginning to end.
+**Business scenario**: University/College Admissions would like an admissions 
+pipeline from beginning to end.
 
 - **Beginning**: A student comes to the university/college for an admission enquiry  
-- **End product**: model decides if student is accepted or rejected 
+- **End product**: A script which invokes a model that 
+decides if student is accepted 
+or rejected 
 
-## Setup
+---
+
+## Option A: Colab notebook (no local setup)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adzuci/admissions-classifier/blob/main/admissions_classifier.ipynb)
+
+Open the notebook in Google Colab. It fetches the dataset from GitHub and trains neural net, logistic regression, and random forest models. Run all cells to train, evaluate, and predict. Works on Colab, Windows, and Mac.
+
+## Option B: Script (local)
+
+### Setup
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 1. Get training data from Kaggle
+### 1. Get training data from Kaggle
 
 Create a [Kaggle account](https://www.kaggle.com) and set up API credentials:
 
@@ -30,30 +43,22 @@ kaggle datasets download -d amanace/student-admission-dataset
 unzip student-admission-dataset.zip
 ```
 
-This produces `student_admission_dataset.csv` with columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status` (Accepted / Rejected / Waitlisted).
+Produces `student_admission_dataset.csv` (columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status`).
 
-## 2. Train
+### 2. Train
 
 ```bash
 python admissions.py --train student_admission_dataset.csv
 ```
 
-Or with default path (uses `student_admission_dataset.csv` if in current directory):
+Or with default path: `python admissions.py --train`
 
-```bash
-python admissions.py --train
-```
+Saves `model.joblib` and `scaler.joblib`.
 
-Produces `model.joblib` and `scaler.joblib`.
-
-## 3. Run (review applications)
+### 3. Run (review applications)
 
 ```bash
 python admissions.py
 ```
 
 Prompts for GPA, SAT score, and extracurricular activities; prints ACCEPTED or REJECTED; asks if you want to review another application.
-
----
-
-**Notebook**: `admissions_classifier.ipynb` — interactive exploration with neural net, logistic regression, and random forest. Runs in Colab or locally (TensorFlow required).
