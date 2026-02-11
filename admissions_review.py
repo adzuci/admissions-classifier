@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Interactive script to review applications using a trained model."""
-import argparse
 import pickle
 
 from tensorflow.keras.models import load_model
@@ -18,13 +17,11 @@ def prompt_application(feature_names):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Review applications interactively")
-    parser.add_argument("--model-path", default="model.keras", help="Path to saved model")
-    parser.add_argument("--scaler-path", default="scaler.pkl", help="Path to saved scaler")
-    args = parser.parse_args()
+    model_path = input("Model path [model.keras]: ").strip() or "model.keras"
+    scaler_path = input("Scaler path [scaler.pkl]: ").strip() or "scaler.pkl"
 
-    model = load_model(args.model_path)
-    scaler = pickle.load(open(args.scaler_path, "rb"))
+    model = load_model(model_path)
+    scaler = pickle.load(open(scaler_path, "rb"))
 
     while True:
         print("\n--- New application ---")

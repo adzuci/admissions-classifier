@@ -4,13 +4,21 @@ Binary classifier that predicts Admit/Reject for graduate school applications us
 
 ## Setup
 
-Requires Python 3.11 (TensorFlow does not support 3.14).
+Uses the `ai-fundamentals` pyenv (Python 3.10.14). Install deps if needed:
 
 ```bash
-python3.11 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+## Train
+
+With the dataset present:
+
+```bash
+python train.py
+```
+
+Produces `model.keras` and `scaler.pkl`. Or run `admissions_classifier.ipynb`.
 
 ## Data
 
