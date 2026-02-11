@@ -34,8 +34,8 @@ model = keras.Sequential([
     layers.Dense(1, activation="sigmoid"),
 ])
 model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
-print("Training (20 epochs, ~200 samples)...")
-model.fit(X_train_s, y_train, epochs=20, batch_size=32, verbose=1)
+print("Training (10 epochs, ~200 samples)...")
+model.fit(X_train_s, y_train, epochs=10, batch_size=32, verbose=1)
 
 loss, acc = model.evaluate(X_test_s, y_test, verbose=0)
 print(f"Test accuracy: {acc:.4f}")
