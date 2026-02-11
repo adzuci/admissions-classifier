@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Interactive script to review applications using a trained model."""
-import pickle
+import joblib
 
 from tensorflow.keras.models import load_model
 
@@ -18,10 +18,10 @@ def prompt_application(feature_names):
 
 def main():
     model_path = input("Model path [model.keras]: ").strip() or "model.keras"
-    scaler_path = input("Scaler path [scaler.pkl]: ").strip() or "scaler.pkl"
+    scaler_path = input("Scaler path [scaler.joblib]: ").strip() or "scaler.joblib"
 
     model = load_model(model_path)
-    scaler = pickle.load(open(scaler_path, "rb"))
+    scaler = joblib.load(scaler_path)
 
     while True:
         print("\n--- New application ---")

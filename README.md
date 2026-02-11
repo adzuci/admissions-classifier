@@ -18,7 +18,7 @@ With the dataset present:
 python train.py
 ```
 
-Produces `model.keras` and `scaler.pkl`. Or run `admissions_classifier.ipynb`.
+Produces `model.keras` and `scaler.joblib`. Or run `admissions_classifier.ipynb`.
 
 ## Data
 
