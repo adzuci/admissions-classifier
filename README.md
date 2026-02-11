@@ -1,6 +1,6 @@
 # Admissions Classifier
 
-Binary classifier that predicts Admit/Reject for graduate school applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset).
+Binary classifier (logistic regression) that predicts Admit/Reject for graduate school applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset).
 
 ## Project Requirements (Instructor)
 
@@ -11,38 +11,49 @@ Binary classifier that predicts Admit/Reject for graduate school applications us
 
 ## Setup
 
-Uses the `ai-fundamentals` pyenv (Python 3.10.14). Install deps if needed:
-
 ```bash
 pip install -r requirements.txt
 ```
 
-## Train
+## 1. Get training data from Kaggle
 
-With the dataset present:
+Create a [Kaggle account](https://www.kaggle.com) and set up API credentials:
 
-```bash
-python train.py
-```
+1. Go to Kaggle → Account → Create New API Token (downloads `kaggle.json`)
+2. Place `kaggle.json` in `~/.kaggle/` (Linux/Mac) or `C:\Users\<user>\.kaggle\` (Windows)
+3. Ensure the file is not publicly readable: `chmod 600 ~/.kaggle/kaggle.json`
 
-Produces `model.keras` and `scaler.joblib`. Or run `admissions_classifier.ipynb`.
-
-**If TensorFlow hangs on Mac** (stuck at Epoch 1): use the NumPy fallback:
-
-```bash
-python train_numpy.py
-```
-
-Produces `model_numpy.joblib` and `scaler.joblib`. When running `admissions_review.py`, enter `model_numpy.joblib` when prompted for model path.
-
-## Data
-
-Download the dataset from Kaggle (requires account and API credentials in `~/.kaggle/kaggle.json`):
+Download the dataset:
 
 ```bash
 kaggle datasets download -d amanace/student-admission-dataset
 unzip student-admission-dataset.zip
-# Output: student_admission_dataset.csv
 ```
 
-Columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status` (Accepted/Rejected/Waitlisted).
+This produces `student_admission_dataset.csv` (columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status`).
+
+## 2. Train
+
+```bash
+python admissions.py --train student_admission_dataset.csv
+```
+
+Or with default path (uses `student_admission_dataset.csv` if in current directory):
+
+```bash
+python admissions.py --train
+```
+
+Produces `model.joblib` and `scaler.joblib`.
+
+## 3. Run (review applications)
+
+```bash
+python admissions.py
+```
+
+Prompts for GPA, SAT score, and extracurricular activities; prints ACCEPTED or REJECTED; asks if you want to review another application.
+
+---
+
+**Notebook**: `admissions_classifier.ipynb` provides exploration with neural net, logistic regression, and random forest. Requires TensorFlow.
