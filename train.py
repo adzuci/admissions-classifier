@@ -1,9 +1,17 @@
 """Train admissions classifier and save model + scaler."""
+import os
+
+# Force CPU - Metal/GPU on Mac can hang; must set before any TF import
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 import joblib
 import numpy as np
 import pandas as pd
 
-print("Importing TensorFlow (may take 10-30s on first run)...")
+print("Importing TensorFlow (CPU mode, may take 10-30s on first run)...")
+import tensorflow as tf
+tf.config.set_visible_devices([], "GPU")
 from tensorflow import keras
 from tensorflow.keras import layers
 
