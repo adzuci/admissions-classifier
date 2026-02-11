@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Admissions classifier: logistic regression. Train on CSV or review applications interactively."""
+"""Admissions classifier: logistic regression for undergraduate applications. Train on CSV or review applications interactively."""
 import argparse
 import joblib
 import numpy as np
@@ -10,7 +10,7 @@ FEATURE_NAMES = ["GPA", "SAT_Score", "Extracurricular_Activities"]
 
 
 class SimpleScaler:
-    """Minimal scaler with fit/transform (no sklearn)."""
+    """Z-score scaler: fit learns mean/std from training data; transform standardizes inputs."""
 
     def fit(self, X):
         self.mean_ = np.mean(X, axis=0)
@@ -23,7 +23,7 @@ class SimpleScaler:
 
 
 def train(csv_path: str) -> None:
-    """Train logistic regression on CSV and save model.joblib + scaler.joblib."""
+    """Train logistic regression on CSV. Saves model.joblib and scaler.joblib."""
     print(f"Loading data from {csv_path}...")
     df = pd.read_csv(csv_path)
     df["Admit"] = (df["Admission_Status"] == "Accepted").astype(int)
@@ -64,7 +64,7 @@ def train(csv_path: str) -> None:
 
 
 def review() -> None:
-    """Interactive review: prompt for GPA, SAT, extracurriculars; give verdict; ask for another."""
+    """Interactive review: prompt for GPA, SAT, extracurriculars; print verdict; offer to review another."""
     model = joblib.load("model.joblib")
     scaler = joblib.load("scaler.joblib")
 
@@ -88,7 +88,7 @@ def review() -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Admissions classifier (logistic regression): train on CSV or review applications"
+        description="Admissions classifier (logistic regression) for undergraduate applications: train on CSV or review interactively"
     )
     parser.add_argument(
         "--train",

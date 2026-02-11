@@ -1,6 +1,6 @@
 # Admissions Classifier
 
-Binary classifier (logistic regression) that predicts Admit/Reject for graduate school applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset).
+Binary classifier (logistic regression) that predicts Admit/Reject for **undergraduate** college applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset). Features: GPA, SAT score, extracurricular activities.
 
 ## Project Requirements (Instructor)
 
@@ -30,7 +30,7 @@ kaggle datasets download -d amanace/student-admission-dataset
 unzip student-admission-dataset.zip
 ```
 
-This produces `student_admission_dataset.csv` (columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status`).
+This produces `student_admission_dataset.csv` with columns: `GPA`, `SAT_Score`, `Extracurricular_Activities`, `Admission_Status` (Accepted / Rejected / Waitlisted).
 
 ## 2. Train
 
@@ -56,4 +56,4 @@ Prompts for GPA, SAT score, and extracurricular activities; prints ACCEPTED or R
 
 ---
 
-**Notebook**: `admissions_classifier.ipynb` provides exploration with neural net, logistic regression, and random forest. Requires TensorFlow.
+**Notebook**: `admissions_classifier.ipynb` — interactive exploration with neural net, logistic regression, and random forest. Runs in Colab or locally (TensorFlow required).
