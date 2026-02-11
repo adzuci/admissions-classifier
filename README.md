@@ -1,13 +1,13 @@
 # Admissions Classifier
 
-Binary classifier (logistic regression) that predicts Admit/Reject for **undergraduate** college applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset). Features: GPA, SAT score, extracurricular activities.
+Binary classifier (logistic regression) that predicts Admit/Reject for college applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset). Features: GPA, SAT score, extracurricular activities.
 
-## Project Requirements (Instructor)
+## Project Requirements
 
-**Business scenario**: University/College Admissions — a pipeline from beginning to end.
+**Business scenario**: University/College Admissions would like an admissions pipeline from beginning to end.
 
 - **Beginning**: A student comes to the university/college for an admission enquiry  
-- **End product**: Admitted
+- **End product**: model decides if student is accepted or rejected 
 
 ## Setup
 
