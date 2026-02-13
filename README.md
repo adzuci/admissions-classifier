@@ -1,6 +1,6 @@
 # Admissions Classifier
 
-Binary classifier that predicts **Accepted** vs **Rejected** for college applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset). Features: GPA, SAT score, extracurricular activities.
+Group project for an **AI Fundamentals** class. Binary classifier that predicts **Accepted** vs **Rejected** for college applications using the [Kaggle student admission dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset). Features: GPA, SAT score, extracurricular activities.
 
 ## How `admissions.py` works
 
@@ -66,6 +66,44 @@ flowchart TD
 
 ---
 
+## Kaggle dataset
+
+[Kaggle Student Admission Dataset](https://www.kaggle.com/datasets/amanace/student-admission-dataset) — 250 applicants, 3 features, binary outcome.
+
+```
+┌─────────────────────────────────────┬──────────────────────────────────────────────────┐
+│  Feature                            │  Range / values                                   │
+├─────────────────────────────────────┼──────────────────────────────────────────────────┤
+│  GPA                                │  2.5 – 4.0  (mean 3.24)                           │
+│  SAT_Score                          │  900 – 1598  (mean 1250)                         │
+│  Extracurricular_Activities         │  0 – 10  (mean 5.2)                               │
+│  Admission_Status (target)           │  Accepted (81) | Rejected (81) | Waitlisted (88)  │
+└─────────────────────────────────────┴──────────────────────────────────────────────────┘
+```
+
+```mermaid
+flowchart LR
+    subgraph inputs["Input features"]
+        GPA["GPA\n2.5–4.0"]
+        SAT["SAT Score\n900–1600"]
+        EX["Extracurriculars\n0–10"]
+    end
+    subgraph model["Classifier"]
+        M[Logistic Regression]
+    end
+    subgraph output["Output"]
+        A[Accepted]
+        R[Rejected]
+    end
+    GPA --> M
+    SAT --> M
+    EX --> M
+    M --> A
+    M --> R
+```
+
+---
+
 ## How to train
 
 ### Option A: Colab notebook (no local setup)
@@ -123,4 +161,16 @@ Prompts for GPA, SAT score, and extracurricular activities; prints ACCEPTED or R
 - **Synthetic data changes the picture**: With 500 synthetic samples and a clear weighted rule, the notebook shows whether neural nets close the gap or beat simpler models.
 - **Why logistic regression for the CLI**: Interpretable coefficients, minimal compute, and probability scores useful for waitlist thresholds. Best accuracy on the small real dataset.
 - **EDA insights**: Extracurriculars shift the admission threshold; strong SAT can offset lower GPA.
-- **Next steps**: Prevent encoding historical bias; add more features; consider cloud-hosted API; Streamlit dashboard; CI/CD for retraining when data updates.
+
+---
+
+## Future roadmap
+
+| Area | Plan |
+|------|------|
+| **Hosting** | Azure or AWS — deploy model as a cloud-hosted API |
+| **Data** | More features, larger training dataset |
+| **UI/UX** | Streamlit dashboard for interactive prediction and visualizations |
+| **CI/CD** | Automate retraining when the dataset updates |
+| **Input validation** | Validate GPA (2–4), SAT (400–1600), extracurriculars (0–20) in `admissions.py` before prediction |
+| **Batch capability** | Add `--batch` mode to `admissions.py` to score a CSV of applicants and write predictions to a file |
