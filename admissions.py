@@ -8,6 +8,28 @@ from sklearn.linear_model import LogisticRegression
 
 FEATURE_NAMES = ["GPA", "SAT_Score", "Extracurricular_Activities"]
 
+# Input validation bounds (per README roadmap)
+VALIDATION = {
+    "GPA": (2.0, 4.0),
+    "SAT_Score": (400, 1600),
+    "Extracurricular_Activities": (0, 20),
+}
+
+
+def prompt_feature(name: str) -> float:
+    """Prompt for a feature value until valid. Returns float in range."""
+    lo, hi = VALIDATION[name]
+    while True:
+        raw = input(f"  {name}: ").strip()
+        try:
+            val = float(raw)
+        except ValueError:
+            print(f"  Invalid: enter a number (e.g. {lo}–{hi})")
+            continue
+        if lo <= val <= hi:
+            return val
+        print(f"  Out of range: {name} must be {lo}–{hi}")
+
 
 class SimpleScaler:
     """Z-score scaler: fit learns mean/std from training data; transform standardizes inputs."""
@@ -70,10 +92,7 @@ def review() -> None:
 
     while True:
         print("\n--- New application ---")
-        values = []
-        for name in FEATURE_NAMES:
-            val = input(f"  {name}: ").strip()
-            values.append(float(val))
+        values = [prompt_feature(name) for name in FEATURE_NAMES]
         X = scaler.transform([values])
         pred = model.predict(X)[0]
 
